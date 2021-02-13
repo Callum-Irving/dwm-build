@@ -5,5 +5,6 @@ xset s 300 300
 picom &>/dev/null &
 lxsession &>/dev/null &
 light-locker --lock-after-screensaver 30 &>/dev/null &
-volumeicon &
-nm-applet &
+# volumeicon &
+# trying to use nmcli instead of this gui app
+# nm-applet &

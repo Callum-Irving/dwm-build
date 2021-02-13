@@ -4,11 +4,7 @@
 /* appearance */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayspacing = 2;   /* systray spacing */
-static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        = 1;     /* 0 means no systray */
+static const unsigned int snap      = 0;        /* snap pixel Default: 32 */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "FiraCode Nerd Font Mono:size=10", "monospace:size=10" };
@@ -66,6 +62,8 @@ static const char *dmenucmd[] = { "dmenu_run", "-h", "14", "-m", dmenumon, "-fn"
 static const char *j4cmd[] = { "j4-dmenu-desktop", "--dmenu=dmenu", "--term=alacritty", NULL };
 static const char *termcmd[]  = { "alacritty", "-e", "fish", NULL};
 
+static const char *screenshotcmd[] = {"flameshot", "gui", NULL};
+
 static const char *refreshcmd[] = { "/home/callum/.dwm/refreshbar.sh" };
 
 static const char *backlightup[] = {"xbacklight", "-inc", "10", NULL};
@@ -96,11 +94,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
+	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
@@ -110,16 +108,18 @@ static Key keys[] = {
         { MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
         { MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
         { MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
-        { 0,                      XF86XK_AudioRaiseVolume,  spawn, {.v = volumeup } },
-        { 0,                      XF86XK_AudioLowerVolume,  spawn, {.v = volumedown } },
-        { 0,                      XF86XK_AudioMute,         spawn, {.v = volumemute } },
-        { 0,                      XF86XK_MonBrightnessUp,   spawn, {.v = backlightup } },
-        { 0,                      XF86XK_MonBrightnessDown, spawn, {.v = backlightdown } },
-        { 0,                      XF86XK_AudioRaiseVolume,  spawn, {.v = refreshcmd} },
-        { 0,                      XF86XK_AudioLowerVolume,  spawn, {.v = refreshcmd} },
-        { 0,                      XF86XK_AudioMute,         spawn, {.v = refreshcmd} },
-        { 0,                      XF86XK_MonBrightnessUp,   spawn, {.v = refreshcmd} },
-        { 0,                      XF86XK_MonBrightnessDown, spawn, {.v = refreshcmd} },
+        { MODKEY,                       XK_r,      spawn,          {.v = refreshcmd } },
+        { 0,                            XK_Print,  spawn,          {.v = screenshotcmd } },
+        { 0,             XF86XK_AudioRaiseVolume,  spawn,          {.v = volumeup } },
+        { 0,             XF86XK_AudioLowerVolume,  spawn,          {.v = volumedown } },
+        { 0,             XF86XK_AudioMute,         spawn,          {.v = volumemute } },
+        { 0,             XF86XK_MonBrightnessUp,   spawn,          {.v = backlightup } },
+        { 0,             XF86XK_MonBrightnessDown, spawn,          {.v = backlightdown } },
+        { 0,             XF86XK_AudioRaiseVolume,  spawn,          {.v = refreshcmd} },
+        { 0,             XF86XK_AudioLowerVolume,  spawn,          {.v = refreshcmd} },
+        { 0,             XF86XK_AudioMute,         spawn,          {.v = refreshcmd} },
+        { 0,             XF86XK_MonBrightnessUp,   spawn,          {.v = refreshcmd} },
+        { 0,             XF86XK_MonBrightnessDown, spawn,          {.v = refreshcmd} },
         { MODKEY,                       XK_s,      spawn,          {.v = suspend } },
         { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = shutdown } },
         { MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lockscreen } },
@@ -132,7 +132,6 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-// 	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = killautostart } },
 	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
 };
 
