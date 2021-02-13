@@ -43,6 +43,8 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+	{ "|M|",      centeredmaster },
+	{ ">M>",      centeredfloatingmaster },
 };
 
 /* key definitions */
@@ -76,8 +78,6 @@ static const char *suspend[] = {"systemctl", "suspend", NULL};
 static const char *shutdown[] = {"systemctl", "poweroff", NULL};
 static const char *lockscreen[] = {"light-locker-command", "-l", NULL};
 
-// static const char *killautostart[] = {"killall", "autostart.sh", NULL};
-
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -96,6 +96,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[2]} },
+        { MODKEY,                       XK_o,      setlayout,      {.v = &layouts[3]} },
+        { MODKEY|ShiftMask,             XK_o,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
