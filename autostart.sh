@@ -50,6 +50,9 @@ statusbar() {
     echo "$(date "+%b %d %H:%M")"
 }
 
+xset s 300 300
+feh --bg-scale /home/callum/Pictures/Wallpapers/Wall21.jpg
+
 while true; do
     xsetroot -name " $(statusbar | tr '\n' ' ')"
     sleep 1m
