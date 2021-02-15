@@ -66,7 +66,7 @@ static const char *termcmd[]  = { "alacritty", "-e", "fish", NULL};
 
 static const char *screenshotcmd[] = {"flameshot", "gui", NULL};
 
-static const char *refreshcmd[] = { "/home/callum/.dwm/refreshbar.sh" };
+static const char *volumesignal[] = { "pkill", "-RTMIN+10", "dwmblocks", NULL };
 
 static const char *backlightup[] = {"xbacklight", "-inc", "10", NULL};
 static const char *backlightdown[] = {"xbacklight", "-dec", "10", NULL};
@@ -110,18 +110,17 @@ static Key keys[] = {
         { MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
         { MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
         { MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
-        { MODKEY,                       XK_r,      spawn,          {.v = refreshcmd } },
         { 0,                            XK_Print,  spawn,          {.v = screenshotcmd } },
         { 0,             XF86XK_AudioRaiseVolume,  spawn,          {.v = volumeup } },
         { 0,             XF86XK_AudioLowerVolume,  spawn,          {.v = volumedown } },
         { 0,             XF86XK_AudioMute,         spawn,          {.v = volumemute } },
         { 0,             XF86XK_MonBrightnessUp,   spawn,          {.v = backlightup } },
         { 0,             XF86XK_MonBrightnessDown, spawn,          {.v = backlightdown } },
-        { 0,             XF86XK_AudioRaiseVolume,  spawn,          {.v = refreshcmd} },
-        { 0,             XF86XK_AudioLowerVolume,  spawn,          {.v = refreshcmd} },
-        { 0,             XF86XK_AudioMute,         spawn,          {.v = refreshcmd} },
-        { 0,             XF86XK_MonBrightnessUp,   spawn,          {.v = refreshcmd} },
-        { 0,             XF86XK_MonBrightnessDown, spawn,          {.v = refreshcmd} },
+        { 0,             XF86XK_AudioRaiseVolume,  spawn,          {.v = volumesignal } },
+        { 0,             XF86XK_AudioLowerVolume,  spawn,          {.v = volumesignal } },
+        { 0,             XF86XK_AudioMute,         spawn,          {.v = volumesignal } },
+        { 0,             XF86XK_MonBrightnessUp,   spawn,          {.v = volumesignal } },
+        { 0,             XF86XK_MonBrightnessDown, spawn,          {.v = volumesignal } },
         { MODKEY,                       XK_s,      spawn,          {.v = suspend } },
         { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = shutdown } },
         { MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lockscreen } },
@@ -147,6 +146,8 @@ static Button buttons[] = {
 	{ ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1} },
 	{ ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2} },
 	{ ClkStatusText,        0,              Button3,        sigdwmblocks,   {.i = 3} },
+	{ ClkStatusText,        0,              Button4,        sigdwmblocks,   {.i = 4} },
+	{ ClkStatusText,        0,              Button5,        sigdwmblocks,   {.i = 5} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
