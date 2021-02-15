@@ -40,7 +40,15 @@ battery() {
     echo "$battery_status: $(cat /sys/class/power_supply/BAT0/capacity)%"
 }
 
+crypto() {
+    echo "BTC: \$$(printf '%.*f\n' 2 $(curl --silent cad.rate.sx/1btc))"
+    # Make non-blocking
+    # exec ~/.dwm/refreshbar.sh
+}
+
 statusbar() {
+    echo "$(crypto)"
+    echo "$delim"
     echo "$(volume)"
     echo "$delim"
     echo "$(network)"
@@ -50,7 +58,7 @@ statusbar() {
     echo "$(date "+%b %d %H:%M")"
 }
 
-xset s 300 300
+# xset s 300 300
 feh --bg-scale /home/callum/Pictures/Wallpapers/Wall21.jpg
 
 while true; do

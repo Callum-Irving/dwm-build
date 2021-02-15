@@ -74,9 +74,9 @@ static const char *volumeup[] = {"pactl", "set-sink-volume", "@DEFAULT_SINK@", "
 static const char *volumedown[] = {"pactl", "set-sink-volume", "@DEFAULT_SINK@", "-2%", NULL};
 static const char *volumemute[] = {"pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL};
 
-static const char *suspend[] = {"systemctl", "suspend", NULL};
+static const char *suspend[] = {"lockscreen.sh", NULL};
 static const char *shutdown[] = {"systemctl", "poweroff", NULL};
-static const char *lockscreen[] = {"light-locker-command", "-l", NULL};
+static const char *lockscreen[] = {"slock", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
